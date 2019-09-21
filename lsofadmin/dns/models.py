@@ -23,7 +23,6 @@ class Record(models.Model):
         return '{0}.{1}'.format(self.name, self.domain.name)
 
     class Meta:
-        name = self.name
         ordering = ['name', 'domain']
         managed = True
 
