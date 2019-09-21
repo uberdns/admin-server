@@ -18,6 +18,7 @@ class Record(models.Model):
     ip_address = models.CharField(max_length=16)
     ttl = models.CharField(max_length=4)
     created_on = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return '{0}.{1}'.format(self.name, self.domain.name)
