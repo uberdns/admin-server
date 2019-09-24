@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
-class DomainManager(models.Model):
+class DomainManager(models.Manager):
     def create_domain(self, name):
         domain = self.create(name=name)
 
