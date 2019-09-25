@@ -12,4 +12,5 @@ unit debian 10:
   script:
     - bash docker-entrypoint.sh
     - coverage erase
-    - coverage run manage.py test lsofadmin
+    - coverage run manage.py test lsofadmin.dns.tests
+    - coverage report

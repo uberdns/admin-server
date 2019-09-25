@@ -1,5 +1,7 @@
 [run]
 source = .
+omit = *tests* *venv*
+plugins = django_coverage_plugin
 
 [report]
 fail_under = 100
