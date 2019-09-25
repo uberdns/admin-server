@@ -41,12 +41,3 @@ API_KEY="abc123"
 CURDATE=$(date "+%Y-%m-%d %T.%N")
 SQL_QUERY="INSERT INTO authtoken_token (\`key\`, created, user_id) VALUES ('${API_KEY}', '${CURDATE}', 1)"
 mysql -e "${SQL_QUERY}" lsofadmin
-
-popd
-
-# Start GO_APPS
-for i in ${GO_APPS[@]}; do
-    pushd $i
-    ./$i > $i.log 2>&1 &
-    popd
-done
