@@ -11,6 +11,7 @@ pip3 install -r requirements.txt
 ## Make migrations
 python3 manage.py makemigrations
 python3 manage.py makemigrations dns
+python3 manage.py migrate
 
 ## Run
 python3 manage.py tests lsofadmin
