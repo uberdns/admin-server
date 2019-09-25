@@ -3,28 +3,91 @@ from django.contrib.auth.models import User
 from lsofadmin.dns.models import Domain, Record
 
 class DomainTestCase(TestCase):
-    domain1 = None
-    domain2 = None
-    user = None
+    domain = None
+    # def setUp(self):
+
+    def test_can_create_domains(self):
+        """Able to create domains"""
+        self.domain = Domain.objects.create(name="test.com")
+        self.assertIsInstance(self.domain, Domain)
+    
+    def test_can_delete_domains(self):
+        """Able to delete domains"""
+        Domain.objects.delete(self.domain)
+        self.assertNotIsInstance(self.domain, Domain)
+
+class RecordTestCase(TestCase):
+    domain = None
+    owner = None
+    admin = None
+    staff = None
+    anonymous = None
+
+    record = None
 
     def setUp(self):
-        user = User.objects.create_user('testluser', password='test')
-        user.is_superuser = False
-        user.is_staff = False
-        user.save()
+        owner = User.objects.create_user('testuser', password='test')
+        owner.is_superuser = False
+        owner.is_staff = False
+        owner.save()
 
-        self.domain1 = Domain.objects.create(name="test.com")
-        self.domain2 = Domain.objects.create(name="test.org")
-        self.user = user
-    
-    def test_can_create_records(self):
-        """Able to create records"""
-        record1 = Record.objects.create(name="test", 
-                                        domain=self.domain1,
-                                        owner=self.user)
-        record2 = Record.objects.create(name="test", 
-                                        domain=self.domain2,
-                                        owner=self.user)
+        anonymous = User.objects.create_user('testanonuser', password='test')
+        anonymous.is_superuser = False
+        anonymous.is_staff = False
+        anonymous.save()
+
+        admin = User.objects.create_user('testadmin', password='test')
+        admin.is_superuser = True
+        admin.is_staff = False
+        admin.save()
+
+        staff = User.objects.create_user('teststaff', password='test')
+        staff.is_superuser = False
+        staff.is_staff = True
+        staff.save()
         
-        self.assertIsInstance(record1, Record)
-        self.assertIsInstance(record2, Record)
+        self.owner = owner
+        self.admin = admin
+        self.staff = staff
+        self.anonymous = anonymous
+
+        self.domain = Domain.objects.create(name="test.com")
+
+    def test_owner_can_create_records(self):
+        """Owner able to create records"""
+        self.record = Record.objects.create(name="test", 
+                                        domain=self.domain,
+                                        owner=self.owner)
+        
+        self.assertIsInstance(self.record, Record)
+    
+    def test_owner_can_delete_records(self):
+        """Owner able to delete records"""
+        Record.objects.delete(self.record)
+        self.assertNotIsInstance(self.record, Record)
+
+    def test_staff_can_create_records(self):
+        """Staff able to create records"""
+        self.record = Record.objects.create(name="test", 
+                                        domain=self.domain,
+                                        owner=self.staff)
+        
+        self.assertIsInstance(self.record, Record)
+    
+    def test_staff_can_delete_records(self):
+        """Staff able to delete records"""
+        Record.objects.delete(self.record)
+        self.assertNotIsInstance(self.record, Record)
+
+    def test_admin_can_create_records(self):
+        """Admin able to create records"""
+        self.record = Record.objects.create(name="test", 
+                                        domain=self.domain,
+                                        owner=self.admin)
+        
+        self.assertIsInstance(self.record, Record)
+    
+    def test_admin_can_delete_records(self):
+        """Admin able to delete records"""
+        Record.objects.delete(self.record)
+        self.assertNotIsInstance(self.record, Record)
