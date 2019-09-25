@@ -1,7 +1,7 @@
 stages:
   - test
 
-unit debian 10:
+unitcoverage debian 10:
   stage: test 
   image: debian:latest
   before_script:
@@ -12,5 +12,5 @@ unit debian 10:
   script:
     - bash docker-entrypoint.sh
     - coverage erase
-    - coverage run manage.py test lsofadmin/dns
+    - coverage run manage.py test lsofadmin.dns.tests
     - coverage report

@@ -3,20 +3,21 @@ from django.contrib.auth.models import User
 from lsofadmin.dns.models import Domain, Record
 
 class DomainTestCase(TestCase):
-    user = User.objects.create_user('testluser', password='test')
-    user.is_superuser = False
-    user.is_staff = False
-    user.save()
-
-    domain1 = Domain.objects.create(name="test.com")
-    domain2 = Domain.objects.create(name="test.org")
+    domain1 = None
+    domain2 = None
+    user = None
 
     def setUp(self):
-        self.assertIsInstance(self.domain1, Domain)
-        self.assertIsInstance(self.domain2, Domain)
-        self.assertIsInstance(self.user, User)
+        user = User.objects.create_user('testluser', password='test')
+        user.is_superuser = False
+        user.is_staff = False
+        user.save()
+
+        self.domain1 = Domain.objects.create(name="test.com")
+        self.domain2 = Domain.objects.create(name="test.org")
+        self.user = user
     
-    def can_create_records(self):
+    def test_can_create_records(self):
         """Able to create records"""
         record1 = Record.objects.create(name="test", 
                                         domain=self.domain1,
