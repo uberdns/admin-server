@@ -3,7 +3,7 @@
 /etc/init.d/redis-server start
 
 mysql -e "CREATE DATABASE lsofadmin"
-mysql -e "GRANT ALL ON lsofadmin.* to 'lsofadmin'@'localhost' identified by 'lsofadmin'"
+mysql -e "GRANT ALL ON *.* to 'lsofadmin'@'localhost' identified by 'lsofadmin'"
 mysql -e "FLUSH PRIVILEGES"
 
 pip3 install -r requirements.txt
