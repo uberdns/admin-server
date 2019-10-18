@@ -25,7 +25,9 @@ SECRET_KEY = 'bj#zojhb&my%6lcs$7t5w)hzb@7s-mhxvqd35h9##f%kywo%$7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  'lsof.top'
+]
 
 
 # Application definition
@@ -84,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lsofadmin',
-        'USER': 'lsofadmin',
-        'PASSWORD': 'lsofadmin',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
