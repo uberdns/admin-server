@@ -1,4 +1,5 @@
 djangorestframework==3.10.3
+djangorestframework_simplejwt==4.3.0
 django
 mysqlclient
 

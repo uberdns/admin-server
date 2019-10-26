@@ -28,7 +28,8 @@ SECRET_KEY = 'bj#zojhb&my%6lcs$7t5w)hzb@7s-mhxvqd35h9##f%kywo%$7'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  'lsof.top'
+  'lsof.top',
+  '127.0.0.1',
 ]
 
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
     'lsofadmin.dns',
 ]
 
@@ -138,6 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
