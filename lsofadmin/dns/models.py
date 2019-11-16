@@ -11,6 +11,7 @@ class DomainManager(models.Manager):
 class Domain(models.Model):
     name = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return 'Domain: {0}'.format(self.name)
